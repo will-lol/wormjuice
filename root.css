@@ -1,0 +1,73 @@
+/* eb-garamond-regular - latin */
+@font-face {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 400;
+  src: local(""),
+    url("./fonts/eb-garamond-v26-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("./fonts/eb-garamond-v26-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* eb-garamond-500 - latin */
+@font-face {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 500;
+  src: local(""), url("./fonts/eb-garamond-v26-latin-500.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("./fonts/eb-garamond-v26-latin-500.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* eb-garamond-700 - latin */
+@font-face {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 700;
+  src: local(""), url("./fonts/eb-garamond-v26-latin-700.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("./fonts/eb-garamond-v26-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+:root {
+  --brown: 24deg, 33%, 31%;
+  --green: 103deg, 50%, 58%;
+  --pink: 335deg, 53%, 87%;
+  font-family: "EB Garamond";
+}
+body {
+  margin: 0;
+}
+h1 {
+  font-size: 2rem;
+  margin: 0.2rem;
+}
+img {
+  max-width: 100%;
+}
+.dark-bg {
+  color: white;
+}
+.light-bg {
+  color: black;
+}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 400px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 500px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 600px;
+  }
+}

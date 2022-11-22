@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Become a worm for one day</title>
+    <link rel="stylesheet" href="root.css">
+  </head>
+  <body>
+    <style>
+      .header {
+        background: hsla(var(--brown), 1);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+    </style>
+    <section class="header dark-bg">
+      <h1 class="worm">Worms in your plants</h1>
+      <style>
+        .worm {
+            text-transform: uppercase;
+        }
+        .worm::after {
+          content: "";
+          background-image: url(worm.png);
+          display: inline-block;
+          height: 2rem;
+          width: 3.5rem;
+          background-size: 3.5rem auto;
+          background-repeat: no-repeat;
+        }
+      </style>
+      <span>The game.</span>
+    </section>
+    <style>
+      .onboard {
+        padding: 2rem 0;
+      }
+    </style>
+    <section class="container onboard">
+      <p>Worms in your plants is a game about worms.</p>
+      <p>Imagine. You are a worm. Please imagine it.</p>
+      <p>
+        Many people imagine being a worm as a sad existance. This game seeks to
+        disprove this assumption.
+      </p>
+      <p>
+        The humble worm's existance is something to aspire toward. Even though
+        it does not understand, it is assisting its ecosystem.
+      </p>
+      <p>Please play the game.</p>
+      <a href="game.html"> <button>Play now</button> </a>
+    </section>
+  </body>
+</html>

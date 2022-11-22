@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+    <link rel="stylesheet" href="root.css" />
+  </head>
+  <body class="dark-bg">
+    <style>
+      body {
+        background-color: hsla(var(--brown), 1);
+        display: flex;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      #score {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 10;
+      }
+    </style>
+    <span id="score">Score: 0</span>
+    <style>
+      .game {
+        height: 70%;
+      }
+    </style>
+    <section id="game" class="container game">
+      <h1 id="title"></h1>
+      <p id="para"></p>
+      <img id="img" src="" alt="" />
+      <button id="button" onclick="next()">Next</button>
+    </section>
+    <section id="minigame" class="minigame">
+      <h1 id="miniGameTitle"></h1>
+      <h2 id="timer"></h2>
+      <svg fill="none" id="minigameSVG" viewBox="0 0 1000 1000">
+        <defs id="svgDefs">
+          <g id="1">
+            <path
+              d="M98.817 186.665c134.742 53.169 89.595-164.137 89.595-164.137-209.905 55.791-89.595 164.137-89.595 164.137Z"
+              style="fill: #7dc95e; fill-opacity: 1"
+            />
+            <path
+              d="M98.817 186.665c134.742 53.169 89.595-164.137 89.595-164.137-209.905 55.791-89.595 164.137-89.595 164.137Z"
+              class="stroke-shape"
+              style="
+                fill: none;
+                stroke-width: 1;
+                stroke: #000;
+                stroke-opacity: 1;
+              "
+            />
+            <path d="M98 184s-29.688 30.585-14.844 57" />
+            <path
+              d="M98 184s-29.688 30.585-14.844 57"
+              class="stroke-shape"
+              style="
+                fill: none;
+                stroke-width: 1;
+                stroke: #000;
+                stroke-opacity: 1;
+              "
+            />
+          </g>
+          <g id="2">
+            <path
+              d="M71.494 205.113C13.098 205.113 9 175.882 9 131.196c0-27.925 87.741-41.887 62.494-41.887-62.494 0-42.769-51.272-42.465-51.742 21.671-33.493 42.465-42.134 75.945 0C129.304 68.186 122.085 8 156.308 8c25.296 0 14.124 7.873 37.943 29.567 35.699 32.513 38.22 9.273 51.335 51.742 9.204 29.806-30.008 38.519-17.855 56.67 13.142 19.629 22.673 14.546-33.48 59.134C165.59 227.872 176.904 247 156.308 247c-27.619 0-30.15-54.206-51.334-54.206-19.238 0-19.626 12.319-33.48 12.319Z"
+              style="fill: #7dc95e; fill-opacity: 1"
+            />
+            <path
+              d="M71.494 205.113C13.098 205.113 9 175.882 9 131.196c0-27.925 87.741-41.887 62.494-41.887-62.494 0-42.769-51.272-42.465-51.742 21.671-33.493 42.465-42.134 75.945 0C129.304 68.186 122.085 8 156.308 8c25.296 0 14.124 7.873 37.943 29.567 35.699 32.513 38.22 9.273 51.335 51.742 9.204 29.806-30.008 38.519-17.855 56.67 13.142 19.629 22.673 14.546-33.48 59.134C165.59 227.872 176.904 247 156.308 247c-27.619 0-30.15-54.206-51.334-54.206-19.238 0-19.626 12.319-33.48 12.319Z"
+              class="stroke-shape"
+              style="
+                fill: none;
+                stroke-width: 1;
+                stroke: #000;
+                stroke-opacity: 1;
+              "
+            />
+          </g>
+          <g id="3">
+            <path
+              d="M52 143.714C52 37.45 125.542-4.02 143.294 14.123c17.751 18.143 81.149 129.591 30.431 129.591-19.416 0-34.372 5.318-46.86 11.882C106.73 166.178 93.011 180 77.359 180 52 180 52 143.714 52 143.714Z"
+              style="fill: #f0ced1; fill-opacity: 1"
+            />
+            <path
+              d="M52 143.714C52 37.45 125.542-4.02 143.294 14.123c17.751 18.143 81.149 129.591 30.431 129.591-19.416 0-34.372 5.318-46.86 11.882C106.73 166.178 93.011 180 77.359 180 52 180 52 143.714 52 143.714Z"
+              class="stroke-shape"
+              style="
+                fill: none;
+                stroke-width: 1;
+                stroke: #000;
+                stroke-opacity: 1;
+              "
+            />
+            <path d="M133 154c0 97.062 71 91.954 71 91.954" />
+            <path
+              d="M133 154c0 97.062 71 91.954 71 91.954"
+              class="stroke-shape"
+              style="
+                fill: none;
+                stroke-width: 1;
+                stroke: #000;
+                stroke-opacity: 1;
+              "
+            />
+          </g>
+          <g id="4">
+            <path
+              d="M127.5 63c37.038-39.037 133.099 64.5 97.5 64.5-46.773 0-48.076 91.957-97.5 64.5C80.46 165.867 30 163.099 30 127.5c0-35.599 63.926-29.113 97.5-64.5Z"
+              style="fill: #f0ced1; fill-opacity: 1"
+            />
+            <path
+              d="M127.5 63c37.038-39.037 133.099 64.5 97.5 64.5-46.773 0-48.076 91.957-97.5 64.5C80.46 165.867 30 163.099 30 127.5c0-35.599 63.926-29.113 97.5-64.5Z"
+              class="stroke-shape"
+              style="
+                fill: none;
+                stroke-width: 1;
+                stroke: #000;
+                stroke-opacity: 1;
+              "
+            />
+          </g>
+          <g id="5">
+            <path
+              d="M100.331 105.574C142.143 65.721 139.455 21 139.455 21s-2.087 43.331 39.123 84.574C210.398 137.419 249 130.632 249 130.632s-57.967 3.112-70.422 42.287C169.124 202.656 227.519 234 227.519 234s-36.943-36.477-88.064-36.477c-26.083 0-39.124 36.477-39.124 36.477s7.745-35.332-19.361-61.081C46.522 140.197 8 146.294 8 146.294s46.507 2.956 92.331-40.72Z"
+              style="fill: #7dc95e; fill-opacity: 1"
+            />
+            <path
+              d="M100.331 105.574C142.143 65.721 139.455 21 139.455 21s-2.087 43.331 39.123 84.574C210.398 137.419 249 130.632 249 130.632s-57.967 3.112-70.422 42.287C169.124 202.656 227.519 234 227.519 234s-36.943-36.477-88.064-36.477c-26.083 0-39.124 36.477-39.124 36.477s7.745-35.332-19.361-61.081C46.522 140.197 8 146.294 8 146.294s46.507 2.956 92.331-40.72Z"
+              class="stroke-shape"
+              style="
+                fill: none;
+                stroke-width: 1;
+                stroke: #000;
+                stroke-opacity: 1;
+              "
+            />
+          </g>
+          <g id="star">
+            <filter
+              id="a"
+              width="1.441"
+              height="1.463"
+              x="-.22"
+              y="-.231"
+              style="color-interpolation-filters: sRGB"
+            >
+              <feFlood
+                flood-color="#B49061"
+                flood-opacity=".498"
+                result="flood"
+              />
+              <feComposite
+                in="SourceGraphic"
+                in2="flood"
+                operator="in"
+                result="composite1"
+              />
+              <feGaussianBlur
+                in="composite1"
+                result="blur"
+                stdDeviation="19.375"
+              />
+              <feOffset result="offset" />
+              <feComposite
+                in="SourceGraphic"
+                in2="offset"
+                result="fbSourceGraphic"
+              />
+              <feColorMatrix
+                in="fbSourceGraphic"
+                result="fbSourceGraphicAlpha"
+                values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+              />
+              <feFlood
+                flood-color="#B49061"
+                flood-opacity=".498"
+                result="flood"
+              />
+              <feComposite
+                in="fbSourceGraphic"
+                in2="flood"
+                operator="in"
+                result="composite1"
+              />
+              <feGaussianBlur
+                in="composite1"
+                result="blur"
+                stdDeviation="19.4"
+              />
+              <feOffset result="offset" />
+              <feComposite
+                in="fbSourceGraphic"
+                in2="offset"
+                result="composite2"
+              />
+            </filter>
+            <path
+              d="M130 180-.315 111.018l-130.703 68.242 25.337-145.253L-210.974-69.21-65-90 .63-222.035 65.508-89.63l145.853 21.616-105.875 102.62Z"
+              style="
+                fill: #f80;
+                stroke-width: 3;
+                stroke-linecap: round;
+                fill-opacity: 1;
+                filter: url(#a);
+              "
+              transform="translate(89.935 97.006) scale(.05)"
+            />
+          </g>
+        </defs>
+      </svg>
+      <div id="wormJuice" class="wormjuicegame">
+        <img id="wormButton" src="worm.png" alt="A worm" />
+      </div>
+      <style>
+        .wormjuicegame {
+          width: 100%;
+          height: 100%;
+          display: none;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 0;
+        }
+        .wormjuicegame img {
+          cursor: pointer;
+          transform: scale(1);
+          transition: all 0.1s ease;
+          width: 50vmin;
+        }
+        .wormjuicegame img:active {
+          transform: scale(0.9);
+        }
+        .minigame {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        }
+        #minigameSVG {
+          position: absolute;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+        }
+        .minigame h1 {
+          position: relative;
+          text-align: center;
+          margin-top: 1rem;
+          z-index: 10;
+          pointer-events: none;
+        }
+        .minigame h2 {
+          position: relative;
+          pointer-events: none;
+          z-index: 10;
+          text-align: center;
+          font-weight: 400;
+          margin: 0;
+        }
+        .minigame canvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      </style>
+    </section>
+    <script>
+      function randIntBetween(min, max) {
+        return Math.floor(Math.random() * (max + 1)) + min;
+      }
+    </script>
+    <script>
+      const gameContainer = document.getElementById("game");
+      const miniGameContainer = document.getElementById("minigame");
+      const scoreContainer = document.getElementById("score");
+      const titleContainer = document.getElementById("title");
+      const paraContainer = document.getElementById("para");
+      const imgContainer = document.getElementById("img");
+      const content = fetch("content.json").then((response) => response.json());
+
+      let day = 1;
+      let score = 0;
+      let minigame = false;
+
+      function next() {
+        if (!minigame) {
+          switchToGame();
+          update(content);
+          minigame = true;
+        } else {
+          switchToMinigame();
+          miniGame();
+          minigame = false;
+        }
+      }
+
+      function miniGame() {
+        const title = document.getElementById("miniGameTitle");
+        const svg = document.getElementById("minigameSVG");
+        const timerElem = document.getElementById("timer");
+
+        let rand = randIntBetween(0, 3);
+
+        switch (rand) {
+          case 0:
+            miniGameBurrow();
+            break;
+          case 1:
+            miniGameEat();
+            break;
+          case 2:
+            miniGameWormJuice();
+            break;
+          case 3:
+            miniGameRest();
+            break;
+        }
+
+        function timer(node, seconds, callback) {
+          let startDate = Date.now();
+          let endDate = Date.now() + seconds * 1000;
+          let currentDate;
+
+          function update() {
+            currentDate = Date.now();
+            node.innerText = Math.trunc((endDate - currentDate) / 100) / 10;
+            if (currentDate >= endDate) {
+              callback();
+            } else {
+              setTimeout(update, 100);
+            }
+          }
+          update();
+        }
+
+        function iterateScore(amount) {
+          score += amount;
+          scoreContainer.innerText = "Score: " + score;
+        }
+
+        function miniGameEat() {
+          timer(timerElem, 7, end);
+
+          title.innerText = "Eat all of the food! (tap/click)";
+          svg.setAttribute(
+            "viewBox",
+            "0, 0, " + window.innerWidth + ", " + window.innerHeight
+          );
+
+          for (let i = 0; i < 25; i++) {
+            let shape = addShapeToSVG(randIntBetween(0, 4) + 1, svg);
+            shape.addEventListener("touchstart", handleClick);
+            shape.addEventListener("click", handleClick);
+          }
+
+          function end() {
+            while (true) {
+              if (svg.lastChild.nodeName != "defs") {
+                svg.lastChild.remove();
+              } else {
+                break;
+              }
+            }
+            next();
+          }
+
+          function handleClick(evt) {
+            evt.preventDefault();
+            evt.target.style.display = "none";
+            iterateScore(1);
+          }
+
+          function addShapeToSVG(num, svg) {
+            const viewBox = svg.viewBox.baseVal;
+            const shape = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "use"
+            );
+            const shapeCoords = [
+              randIntBetween(0, viewBox.width) - 150,
+              randIntBetween(0, viewBox.height) - 150,
+            ];
+            shape.setAttributeNS(null, "href", "#" + num);
+            shape.setAttributeNS(null, "x", shapeCoords[0]);
+            shape.setAttributeNS(null, "y", shapeCoords[1]);
+            svg.appendChild(shape);
+
+            return shape;
+          }
+        }
+
+        function miniGameRest() {
+            title.innerText = "Take a rest for 5 seconds. Worm life isn't too stressful!";
+            timer(timerElem, 5, end);
+            function end() {
+                next();
+            }
+        }
+
+        function miniGameWormJuice() {
+          const wormJuice = document.getElementById("wormJuice");
+          wormJuice.style.display = "flex";
+          title.innerText = "Click the worm to excrete worm juice into the soil!";
+
+          timer(timerElem, 5, end);
+
+          function star() {
+            const viewBox = svg.viewBox.baseVal;
+            const shape = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "use"
+            );
+            const shapeCoords = [
+              randIntBetween(0, viewBox.width) - 150,
+              randIntBetween(0, viewBox.height) - 150,
+            ];
+            shape.setAttributeNS(null, "href", "#star");
+            shape.setAttributeNS(null, "x", shapeCoords[0]);
+            shape.setAttributeNS(null, "y", shapeCoords[1]);
+            svg.appendChild(shape);
+
+            let animation = shape.animate([{opacity: 1}, {opacity: 0}], {duration: 3000});
+            animation.onfinish = (event) => {
+                shape.remove();
+            }
+          }
+
+          const wormButton = document.getElementById("wormButton");
+          function clickHandle(event) {
+            star();
+            iterateScore(1);
+          }
+          
+          wormButton.addEventListener("click", clickHandle);
+
+          function end() {
+            wormJuice.style.display = "none";
+            wormButton.removeEventListener("click", clickHandle);
+            next();
+          }
+        }
+
+        function miniGameBurrow() {
+          const canvas = document.createElement("canvas");
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          miniGameContainer.append(canvas);
+          let canvasContext = canvas.getContext("2d");
+          let beforeScore = score;
+
+          title.innerText = "Burrow as much as you can! (move your mouse)";
+
+          canvasContext.lineWidth = 100;
+          canvasContext.lineCap = "round";
+          canvasContext.strokeStyle = "#885F44";
+
+          function drawMove(event) {
+            canvasContext.lineTo(
+              event.pageX - canvas.offsetLeft,
+              event.pageY - canvas.offsetTop
+            );
+            canvasContext.stroke();
+
+            iterateScore(
+              Math.trunc(beforeScore + calculatePaintedRatio() * 20 - score)
+            );
+          }
+          function touchMove(event) {
+            drawMove(event.touches[0]);
+            event.preventDefault();
+          }
+
+          canvasContext.beginPath();
+
+          canvas.addEventListener("touchmove", touchMove, false);
+          canvas.addEventListener("mousemove", drawMove, false);
+
+          function end() {
+            canvas.remove();
+            next();
+          }
+
+          timer(timerElem, 5, end);
+
+          function calculatePaintedRatio() {
+            let data = canvasContext.getImageData(
+              0,
+              0,
+              canvas.width,
+              canvas.height
+            ).data;
+            let count = 0;
+            for (let i = 3; i < data.length; i += 4) {
+              if (data[i] > 50) {
+                count++;
+              }
+            }
+            return count / (canvas.width * canvas.height);
+          }
+        }
+      }
+
+      async function update(content) {
+        content = await content;
+        const dayContent = content[day - 1];
+
+        scoreContainer.innerText = "Score: " + score;
+        titleContainer.innerText = "Day " + dayContent.day;
+        paraContainer.innerText = dayContent.content.para;
+
+        if (dayContent.content.image) {
+          imgContainer.setAttribute("src", dayContent.content.image.path);
+          imgContainer.setAttribute("alt", dayContent.content.image.alt);
+          paraContainer.after(imgContainer);
+        }
+
+        day++;
+      }
+
+      function switchToMinigame() {
+        gameContainer.style.display = "none";
+        miniGameContainer.style.display = "block";
+      }
+
+      function switchToGame() {
+        gameContainer.style.display = "block";
+        miniGameContainer.style.display = "none";
+      }
+
+      next();
+    </script>
+  </body>
+</html>
