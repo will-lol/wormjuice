@@ -401,17 +401,19 @@
         }
 
         function miniGameRest() {
-            title.innerText = "Take a rest for 5 seconds. Worm life isn't too stressful!";
-            timer(timerElem, 5, end);
-            function end() {
-                next();
-            }
+          title.innerText =
+            "Take a rest for 5 seconds. Worm life isn't too stressful!";
+          timer(timerElem, 5, end);
+          function end() {
+            next();
+          }
         }
 
         function miniGameWormJuice() {
           const wormJuice = document.getElementById("wormJuice");
           wormJuice.style.display = "flex";
-          title.innerText = "Click the worm to excrete worm juice into the soil!";
+          title.innerText =
+            "Click the worm to excrete worm juice into the soil!";
 
           timer(timerElem, 5, end);
 
@@ -430,10 +432,12 @@
             shape.setAttributeNS(null, "y", shapeCoords[1]);
             svg.appendChild(shape);
 
-            let animation = shape.animate([{opacity: 1}, {opacity: 0}], {duration: 3000});
+            let animation = shape.animate([{ opacity: 1 }, { opacity: 0 }], {
+              duration: 3000,
+            });
             animation.onfinish = (event) => {
-                shape.remove();
-            }
+              shape.remove();
+            };
           }
 
           const wormButton = document.getElementById("wormButton");
@@ -453,6 +457,7 @@
 
         function miniGameBurrow() {
           const canvas = document.createElement("canvas");
+          const burrowWorker = new Worker("wormBurrowWorker.js");
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
           miniGameContainer.append(canvas);
@@ -491,22 +496,30 @@
             next();
           }
 
-          timer(timerElem, 5, end);
+          timer(timerElem, 20, end);
+
+          let count = 0;
+          let prev = 0;
+
+          burrowWorker.onmessage = (e) => {
+            prev = e.data;
+          };
 
           function calculatePaintedRatio() {
-            let data = canvasContext.getImageData(
-              0,
-              0,
-              canvas.width,
-              canvas.height
-            ).data;
-            let count = 0;
-            for (let i = 3; i < data.length; i += 4) {
-              if (data[i] > 50) {
-                count++;
-              }
+            if (count <= 10) {
+              count++;
+            } else {
+              burrowWorker.postMessage({
+                imageData: canvasContext.getImageData(
+                  0,
+                  0,
+                  canvas.width,
+                  canvas.height
+                ).data,
+                canvas: { width: canvas.width, height: canvas.height },
+              });
             }
-            return count / (canvas.width * canvas.height);
+            return prev;
           }
         }
       }
