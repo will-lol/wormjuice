@@ -460,8 +460,11 @@
           const burrowWorker = new Worker("wormBurrowWorker.js");
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
+          canvas.will
           miniGameContainer.append(canvas);
-          let canvasContext = canvas.getContext("2d");
+          let canvasContext = canvas.getContext("2d", {
+            willReadFrequently: true
+          });
           let beforeScore = score;
 
           title.innerText = "Burrow as much as you can! (move your mouse)";
@@ -470,7 +473,7 @@
           canvasContext.lineCap = "round";
           canvasContext.strokeStyle = "#885F44";
 
-          function drawMove(event) {
+          async function drawMove(event) {
             canvasContext.lineTo(
               event.pageX - canvas.offsetLeft,
               event.pageY - canvas.offsetTop
@@ -506,10 +509,10 @@
           };
 
           function calculatePaintedRatio() {
-            if (count <= 10) {
+            if (count <= 20) {
               count++;
             } else {
-              burrowWorker.postMessage({
+              window.requestAnimationFrame(() => {burrowWorker.postMessage({
                 imageData: canvasContext.getImageData(
                   0,
                   0,
@@ -517,7 +520,8 @@
                   canvas.height
                 ).data,
                 canvas: { width: canvas.width, height: canvas.height },
-              });
+              })});
+              count = 0;
             }
             return prev;
           }
